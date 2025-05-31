@@ -20,4 +20,4 @@ jobs:
         run: pip install -r requirements.txt  # If needed
 
       - name: Run script
-        run: python auto.py
+        run: python swing_trading_stocks_alert.py
