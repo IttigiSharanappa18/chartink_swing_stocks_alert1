@@ -1,0 +1,23 @@
+name: Scheduled Python Script
+
+on:
+  schedule:
+    - cron: '0 9-15 * * 1-5'  # Runs hourly from 9 AM to 3 PM IST, Monday to Friday
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt  # If needed
+
+      - name: Run script
+        run: python auto.py
