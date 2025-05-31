@@ -3,6 +3,8 @@ name: Scheduled Python Script
 on:
   schedule:
     - cron: '0 9-15 * * 1-5'  # Runs hourly from 9 AM to 3 PM IST, Monday to Friday
+  workflow_dispatch:  # Allows manual execution
+
 
 jobs:
   run-script:
