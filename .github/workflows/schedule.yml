@@ -5,7 +5,6 @@ on:
     - cron: '0 9-15 * * 1-5'  # Runs hourly from 9 AM to 3 PM IST, Monday to Friday
   workflow_dispatch:  # Allows manual execution
 
-
 jobs:
   run-script:
     runs-on: ubuntu-latest
@@ -17,22 +16,25 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+
       - name: Install WebDriver
         run: |
-           sudo apt update
-           sudo apt install -y chromium-chromedriver
+          sudo apt update
+          sudo apt install -y chromium-chromedriver chromium-browser
+
       - name: Debugging:.github/workflows/requirement.txt
         run: ls -R
+
       - name: Cache Python Packages
         uses: actions/cache@v3
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('.github/workflows/requirement.txt') }}
-          restore-keys: | 
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirement.txt') }}
+          restore-keys: |
             ${{ runner.os }}-pip-
-
+      
       - name: Install dependencies
-        run: pip install -r .github/workflows/requirement.txt  # If needed
+        run: pip install -r .github/workflows/requirement.txt
 
       - name: Run script
         run: python swing_trading_stocks_alert.py
