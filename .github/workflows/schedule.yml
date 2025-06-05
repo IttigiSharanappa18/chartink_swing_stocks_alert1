@@ -30,7 +30,7 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Install dependencies
-        run: pip install -r requirements.txt  # If needed
+        run: pip install -r .github/workflows/requirement.txt  # If needed
 
       - name: Run script
         run: python swing_trading_stocks_alert.py
