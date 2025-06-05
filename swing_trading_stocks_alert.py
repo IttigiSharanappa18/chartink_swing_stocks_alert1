@@ -36,7 +36,7 @@ def get_stocks():
 
     for scan_link_name,scan_links in scan_links_dict.items():
         print("Initializing WebDriver...")
-        service = Service(r'chromedriver.exe')
+        service = Service(r'https://github.com/IttigiSharanappa18/chartink_swing_stocks_alert1/blob/92fe1a2ea45a1686a0d4af18b45843b87da80478/chromedriver.exe')
         driver = webdriver.Chrome(service=service)
         driver.get('https://www.chartink.com/login')
         print("Logging in...")
