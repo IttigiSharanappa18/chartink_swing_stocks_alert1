@@ -1,6 +1,6 @@
 import time
 import pandas as pd
-import schedule
+#import schedule
 import asyncio
 from docx import Document
 from telegram import Bot
