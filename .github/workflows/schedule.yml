@@ -21,13 +21,13 @@ jobs:
         run: |
            sudo apt update
            sudo apt install -y chromium-chromedriver
-      - name: Debugging:requirement.txt
+      - name: Debugging:.github/workflows/requirement.txt
         run: ls -R
       - name: Cache Python Packages
         uses: actions/cache@v3
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('.github/workflows/requirement.txt') }}
           restore-keys: | 
             ${{ runner.os }}-pip-
 
