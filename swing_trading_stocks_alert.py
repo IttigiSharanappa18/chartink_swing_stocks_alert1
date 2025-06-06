@@ -1,5 +1,6 @@
 import time
 import pandas as pd
+import schedule
 import asyncio
 from docx import Document
 from telegram import Bot
@@ -9,6 +10,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 
 # Replace these with your actual credentials and details
 username = 'ittigisharan25@gmail.com'
@@ -36,8 +38,10 @@ def get_stocks():
 
     for scan_link_name,scan_links in scan_links_dict.items():
         print("Initializing WebDriver...")
-        service = Service(r'https://github.com/IttigiSharanappa18/chartink_swing_stocks_alert1/blob/92fe1a2ea45a1686a0d4af18b45843b87da80478/chromedriver.exe')
-        driver = webdriver.Chrome(service=service)
+        options = webdriver.ChromeOptions()
+        driver = webdriver.Chrome(service=webdriver.ChromeService(ChromeDriverManager().install()), options=options)
+        #service = Service(r'C:/Users/ittig/Downloads/chromedriver-win64/chromedriver-win64/chromedriver.exe')
+        #driver = webdriver.Chrome(service=service)
         driver.get('https://www.chartink.com/login')
         print("Logging in...")
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, 'email')))
