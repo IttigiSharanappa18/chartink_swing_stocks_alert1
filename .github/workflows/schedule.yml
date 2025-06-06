@@ -21,6 +21,10 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y chromium-chromedriver chromium-browser
+      - name: Install Chrome & ChromeDriver
+        run: |
+          sudo apt update
+          sudo apt install -y chromium-browser chromium-chromedriver
 
       - name: Debugging:.github/workflows/requirement.txt
         run: ls -R
@@ -32,7 +36,10 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('requirement.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-      
+      - name: Verify ChromeDriver Installation
+        run: |
+          which chromedriver
+          chromedriver --version
       - name: Install dependencies
         run: pip install -r .github/workflows/requirement.txt
 
