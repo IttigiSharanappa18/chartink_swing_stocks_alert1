@@ -37,10 +37,10 @@ def get_stocks():
 
     for scan_link_name,scan_links in scan_links_dict.items():
         print("Initializing WebDriver...")
-        options = webdriver.ChromeOptions()
-        driver = webdriver.Chrome(service=webdriver.ChromeService(ChromeDriverManager().install()), options=options)
-        #service = Service(r'C:/Users/ittig/Downloads/chromedriver-win64/chromedriver-win64/chromedriver.exe')
-        #driver = webdriver.Chrome(service=service)
+        #options = webdriver.ChromeOptions()
+        #driver = webdriver.Chrome(service=webdriver.ChromeService(ChromeDriverManager().install()), options=options)
+        service = Service(r'https://github.com/IttigiSharanappa18/chartink_swing_stocks_alert1/blob/2398a6ed967f0b8dcab0aed4c2957bf56223065f/chromedriver.exe')
+        driver = webdriver.Chrome(service=service)
         driver.get('https://www.chartink.com/login')
         print("Logging in...")
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, 'email')))
