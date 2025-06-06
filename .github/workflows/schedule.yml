@@ -25,7 +25,9 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y chromium-browser chromium-chromedriver
-
+      - name: Fix ChromeDriver Permissions
+        run: chmod +x .github/workflows/chromedriver
+        
       - name: Debugging:.github/workflows/requirement.txt
         run: ls -R
 
