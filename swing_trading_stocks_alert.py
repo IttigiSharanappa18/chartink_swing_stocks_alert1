@@ -48,6 +48,7 @@ def get_stocks():
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
         chrome_root = ChromeDriverManager().install()
+        print(f"Resolved ChromeDriver binary: {driver_path}")
         executable_path = str(Path(chrome_root).parent / "chromedriver")
         print("Using actual driver binary:", executable_path)
         driver_path = ChromeDriverManager().install()
