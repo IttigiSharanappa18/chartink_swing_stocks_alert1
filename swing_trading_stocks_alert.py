@@ -50,10 +50,14 @@ def get_stocks():
         chrome_root = ChromeDriverManager().install()
         executable_path = str(Path(chrome_root).parent / "chromedriver")
         print("Using actual driver binary:", executable_path)
+        driver_path = ChromeDriverManager().install()
+        print("ChromeDriver path:", driver_path)
+        driver_folder = Path(driver_path).parent
+        print("Driver folder contents:", list(driver_folder.iterdir()))
 
         service = Service(executable_path)
         driver = webdriver.Chrome(service=service, options=options)
-
+        
         driver.get('https://www.chartink.com/login')
         print("Logging in...")
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, 'email')))
