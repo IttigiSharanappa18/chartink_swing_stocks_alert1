@@ -11,6 +11,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
+from webdriver_manager.core.utils import get_browser_version_from_os
+from pathlib import Path
+
 
 # Replace these with your actual credentials and details
 username = 'ittigisharan25@gmail.com'
@@ -44,10 +47,13 @@ def get_stocks():
         options.add_argument('--headless')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
-        driver_path = ChromeDriverManager().install()
-        print("Driver installed to:", driver_path)
-        service = Service(ChromeDriverManager().install())
+        chrome_root = ChromeDriverManager().install()
+        executable_path = str(Path(chrome_root).parent / "chromedriver")
+        print("Using actual driver binary:", executable_path)
+
+        service = Service(executable_path)
         driver = webdriver.Chrome(service=service, options=options)
+
         driver.get('https://www.chartink.com/login')
         print("Logging in...")
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, 'email')))
