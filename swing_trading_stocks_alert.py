@@ -40,12 +40,12 @@ def get_stocks():
         print("Initializing WebDriver...")
         #service = Service(r'.github/workflows/chromedriver.exe')
         #driver = webdriver.Chrome(service=service)
-        
-
         options = Options()
         options.add_argument('--headless')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
+        driver_path = ChromeDriverManager().install()
+        print("Driver installed to:", driver_path)
         service = Service(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service, options=options)
         driver.get('https://www.chartink.com/login')
