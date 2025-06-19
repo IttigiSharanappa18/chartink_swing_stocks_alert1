@@ -23,6 +23,8 @@ jobs:
           pip install -r .github/workflows/requirement.txt
       - name: Check chromedriver directory
         run: ls -l ~/.wdm/drivers/chromedriver/linux64/*/
-
       - name: Run the script
         run: python swing_trading_stocks_alert.py
+
+      - name: List downloaded WebDriver files
+        run: ls -l ~/.wdm/drivers/chromedriver/linux64/*/
