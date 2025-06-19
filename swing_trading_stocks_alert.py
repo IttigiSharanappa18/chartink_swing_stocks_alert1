@@ -10,6 +10,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 
 # Replace these with your actual credentials and details
 username = 'ittigisharan25@gmail.com'
@@ -37,10 +38,16 @@ def get_stocks():
 
     for scan_link_name,scan_links in scan_links_dict.items():
         print("Initializing WebDriver...")
-        #options = webdriver.ChromeOptions()
-        #driver = webdriver.Chrome(service=webdriver.ChromeService(ChromeDriverManager().install()), options=options)
-        service = Service(r'.github/workflows/chromedriver.exe')
-        driver = webdriver.Chrome(service=service)
+        #service = Service(r'.github/workflows/chromedriver.exe')
+        #driver = webdriver.Chrome(service=service)
+        
+
+        options = Options()
+        options.add_argument('--headless')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        service = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service, options=options)
         driver.get('https://www.chartink.com/login')
         print("Logging in...")
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, 'email')))
