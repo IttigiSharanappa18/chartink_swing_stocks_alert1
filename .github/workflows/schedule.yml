@@ -2,8 +2,8 @@ name: Scheduled Python Script
 
 on:
   schedule:
-    - cron: '0 9-15 * * 1-5'  # Runs hourly from 9 AM to 3 PM IST, Monday to Friday
-  workflow_dispatch:  # Allows manual execution
+    - cron: '0 3-9 * * 1-5'  # 9AM–3PM IST = 3:00–9:00 UTC
+  workflow_dispatch:
 
 jobs:
   run-script:
@@ -17,33 +17,10 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Install WebDriver
-        run: |
-          sudo apt update
-          sudo apt install -y chromium-chromedriver chromium-browser
-      - name: Install Chrome & ChromeDriver
-        run: |
-          sudo apt update
-          sudo apt install -y chromium-browser chromium-chromedriver
-      - name: Fix ChromeDriver Permissions
-        run: chmod +x .github/workflows/chromedriver.exe
-        
-      - name: Debugging:.github/workflows/requirement.txt
-        run: ls -R
-
-      - name: Cache Python Packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirement.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-      - name: Verify ChromeDriver Installation
-        run: |
-          which chromedriver
-          chromedriver --version
       - name: Install dependencies
-        run: pip install -r .github/workflows/requirement.txt
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r .github/workflows/requirement.txt
 
-      - name: Run script
+      - name: Run the script
         run: python swing_trading_stocks_alert.py
