@@ -16,7 +16,12 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-
+      - name: Pre-download ChromeDriver
+        run: | 
+          python -c "from webdriver_manager.chrome import ChromeDriverManager; print('Driver:', ChromeDriverManager().install())"
+      - name: Inspect downloaded ChromeDriver
+        run: ls -l ~/.wdm/drivers/chromedriver/linux64/*/
+      
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
